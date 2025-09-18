@@ -1,0 +1,71 @@
+/* Admin Access Styles - matching schooltips site design */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.info-message {
+    color: #444;
+    background: #f5f7ff;
+    border-left: 4px solid #667eea;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    h2 {
+        font-size: 24px;
+    }
+}
