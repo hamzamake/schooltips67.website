@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Admin Dashboard</h1>
+            <div class="user-info">
+                <span id="welcomeUser">Welcome, Admin</span>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+        </header>
+        
+        <main class="dashboard-main">
+            <div class="section">
+                <h2>User Management</h2>
+                
+                <div class="add-user-form">
+                    <h3>Add New User</h3>
+                    <form id="addUserForm">
+                        <input type="text" id="newUsername" placeholder="Username" required>
+                        <input type="password" id="newPassword" placeholder="Password" required>
+                        <select id="newRole">
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                        <button type="submit">Add User</button>
+                    </form>
+                </div>
+                
+                <div class="users-list">
+                    <h3>All Users</h3>
+                    <div id="usersContainer">
+                        <p>Loading users...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Edit User Modal -->
+    <div id="editModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Edit User</h3>
+            <form id="editUserForm">
+                <input type="hidden" id="editUserId">
+                <input type="text" id="editUsername" placeholder="Username" required>
+                <input type="password" id="editPassword" placeholder="New Password (leave blank to keep current)">
+                <select id="editRole">
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <div class="modal-buttons">
+                    <button type="submit">Save Changes</button>
+                    <button type="button" id="cancelEdit">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>

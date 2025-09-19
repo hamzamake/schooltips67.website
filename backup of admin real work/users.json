@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "$2b$10$9bID7QdB/YfQBAwSZoq6MOwqGJ3zmb4sqdj52aGOzVLyN/ySr7hOi",
+      "role": "admin",
+      "createdAt": "2025-09-19T23:17:17.037Z"
+    },
+    {
+      "id": 2,
+      "username": "test",
+      "password": "$2b$10$/iLCdU3XwLqRBiQCy1CwM.el3k63F9/NqIUVKyyc.GIuwSQVk2X4K",
+      "role": "user",
+      "createdAt": "2025-09-19T23:20:21.370Z"
+    }
+  ]
+}
