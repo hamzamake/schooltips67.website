@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - SchoolTips67</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #764ba2;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-home {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-home:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .dashboard-container {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .dashboard-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .proxy-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .proxy-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+
+        .url-input {
+            flex: 1;
+            min-width: 300px;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .url-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+            padding: 12px 20px;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #64748b;
+            padding: 12px 20px;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+            transform: translateY(-2px);
+        }
+
+        .btn-fullscreen {
+            background: #10b981;
+            color: white;
+            padding: 12px 20px;
+        }
+
+        .btn-fullscreen:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-about-blank {
+            background: #f59e0b;
+            color: white;
+            padding: 12px 20px;
+        }
+
+        .btn-about-blank:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .proxy-container {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            background: #f8fafc;
+        }
+
+        .proxy-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-card h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-card p {
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .quick-link {
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .quick-link:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .fullscreen-mode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            background: white;
+        }
+
+        .fullscreen-mode .proxy-iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .fullscreen-controls {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 10000;
+            display: none;
+        }
+
+        .fullscreen-mode .fullscreen-controls {
+            display: block;
+        }
+
+        .exit-fullscreen {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .exit-fullscreen:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            .proxy-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .url-input {
+                min-width: auto;
+                width: 100%;
+            }
+
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+
+            .proxy-container {
+                height: 400px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            .proxy-section, .info-section {
+                padding: 1.5rem;
+            }
+
+            .dashboard-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">School<span>Tips67</span></a>
+            <div class="nav-buttons">
+                <a href="/index.html" class="btn btn-home">🏠 Home</a>
+                <a href="/calculator.html" class="btn btn-secondary">🧮 Calculator</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>📊 User Dashboard</h1>
+                <p>Access web resources through our secure proxy with fullscreen capability</p>
+            </div>
+
+            <div class="proxy-section">
+                <h2 style="margin-bottom: 1rem; color: #333; display: flex; align-items: center; gap: 0.5rem;">
+                    🌐 Web Proxy
+                    <span style="font-size: 0.8rem; background: #10b981; color: white; padding: 4px 8px; border-radius: 10px;">Secure</span>
+                </h2>
+                
+                <div class="proxy-controls">
+                    <input 
+                        type="url" 
+                        class="url-input" 
+                        id="urlInput" 
+                        placeholder="Enter website URL (e.g., https://example.com)"
+                        value=""
+                    >
+                    <button class="btn btn-primary" onclick="loadUrl()">
+                        🚀 Load Site
+                    </button>
+                    <button class="btn btn-fullscreen" onclick="toggleFullscreen()">
+                        ⛶ Fullscreen
+                    </button>
+                    <button class="btn btn-about-blank" onclick="openInBlank()">
+                        📄 Open in about:blank
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearProxy()">
+                        🗑️ Clear
+                    </button>
+                </div>
+
+                <div class="quick-links">
+                    <a href="#" class="quick-link" onclick="loadQuickUrl('https://www.google.com')">Google</a>
+                    <a href="#" class="quick-link" onclick="loadQuickUrl('https://www.wikipedia.org')">Wikipedia</a>
+                    <a href="#" class="quick-link" onclick="loadQuickUrl('https://www.khan academy.org')">Khan Academy</a>
+                    <a href="#" class="quick-link" onclick="loadQuickUrl('https://www.coursera.org')">Coursera</a>
+                    <a href="#" class="quick-link" onclick="loadQuickUrl('https://www.youtube.com')">YouTube</a>
+                    <a href="#" class="quick-link" onclick="loadQuickUrl('https://www.github.com')">GitHub</a>
+                </div>
+
+                <div class="proxy-container" id="proxyContainer">
+                    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Loading website...</p>
+                    </div>
+                    <iframe 
+                        class="proxy-iframe" 
+                        id="proxyIframe"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                        title="Web Proxy"
+                    ></iframe>
+                </div>
+
+                <div class="fullscreen-controls">
+                    <button class="exit-fullscreen" onclick="exitFullscreen()">
+                        ✕ Exit Fullscreen
+                    </button>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2 style="margin-bottom: 1rem; color: #333;">ℹ️ How to Use the Proxy</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>🔗 Enter URL</h4>
+                        <p>Type or paste any website URL in the input field. Make sure to include https:// for secure sites.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>⛶ Fullscreen Mode</h4>
+                        <p>Click the fullscreen button to expand the proxy to fill your entire screen. Perfect for focus sessions!</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>📄 about:blank Feature</h4>
+                        <p>Open the current site in a new about:blank window for a clean, distraction-free browsing experience.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>🚀 Quick Links</h4>
+                        <p>Use the preset quick links for popular educational and reference websites to get started quickly.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>🔒 Security</h4>
+                        <p>The proxy runs in a sandboxed environment to help protect your privacy and security while browsing.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>📱 Mobile Friendly</h4>
+                        <p>The dashboard is fully responsive and works great on mobile devices, tablets, and desktop computers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isFullscreen = false;
+        
+        function loadUrl() {
+            const urlInput = document.getElementById('urlInput');
+            const iframe = document.getElementById('proxyIframe');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            let url = urlInput.value.trim();
+            
+            if (!url) {
+                alert('Please enter a URL');
+                return;
+            }
+            
+            // Add https:// if no protocol is specified
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+                urlInput.value = url;
+            }
+            
+            // Show loading overlay
+            loadingOverlay.style.display = 'flex';
+            
+            // Set iframe source
+            iframe.src = url;
+            
+            // Hide loading overlay after a delay
+            iframe.onload = function() {
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 500);
+            };
+            
+            // Handle loading errors
+            iframe.onerror = function() {
+                loadingOverlay.innerHTML = '<div style="text-align: center;"><p>Unable to load website.</p><p style="margin-top: 10px;"><button onclick="clearProxy()" style="padding: 8px 16px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">Try Again</button></p></div>';
+            };
+        }
+        
+        function loadQuickUrl(url) {
+            document.getElementById('urlInput').value = url;
+            loadUrl();
+        }
+        
+        function clearProxy() {
+            const iframe = document.getElementById('proxyIframe');
+            const urlInput = document.getElementById('urlInput');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            iframe.src = '';
+            urlInput.value = '';
+            loadingOverlay.style.display = 'none';
+        }
+        
+        function toggleFullscreen() {
+            const container = document.getElementById('proxyContainer');
+            
+            if (!isFullscreen) {
+                container.classList.add('fullscreen-mode');
+                isFullscreen = true;
+                
+                // Try to use native fullscreen API if available
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+            } else {
+                exitFullscreen();
+            }
+        }
+        
+        function exitFullscreen() {
+            const container = document.getElementById('proxyContainer');
+            container.classList.remove('fullscreen-mode');
+            isFullscreen = false;
+            
+            // Exit native fullscreen if active
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        }
+        
+        function openInBlank() {
+            const iframe = document.getElementById('proxyIframe');
+            const currentUrl = iframe.src;
+            
+            if (!currentUrl) {
+                alert('Please load a website first');
+                return;
+            }
+            
+            // Create a new about:blank window
+            const newWindow = window.open('about:blank', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+            
+            if (newWindow) {
+                // Write the content to the new window
+                newWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>SchoolTips67 Proxy</title>
+                        <style>
+                            body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+                            .header { background: #667eea; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+                            .title { font-weight: bold; }
+                            .url { font-size: 12px; opacity: 0.8; }
+                            iframe { width: 100%; height: calc(100vh - 50px); border: none; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="header">
+                            <div class="title">SchoolTips67 Proxy</div>
+                            <div class="url">${currentUrl}</div>
+                        </div>
+                        <iframe src="${currentUrl}" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+                    </body>
+                    </html>
+                `);
+                newWindow.document.close();
+            } else {
+                alert('Popup blocked! Please allow popups for this site and try again.');
+            }
+        }
+        
+        // Handle escape key to exit fullscreen
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isFullscreen) {
+                exitFullscreen();
+            }
+        });
+        
+        // Handle native fullscreen change events
+        document.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement && isFullscreen) {
+                exitFullscreen();
+            }
+        });
+        
+        // Handle Enter key in URL input
+        document.getElementById('urlInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                loadUrl();
+            }
+        });
+        
+        // Initialize with a welcome message
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframe = document.getElementById('proxyIframe');
+            iframe.srcdoc = `
+                <html>
+                <head>
+                    <style>
+                        body { 
+                            font-family: Arial, sans-serif; 
+                            display: flex; 
+                            flex-direction: column;
+                            justify-content: center; 
+                            align-items: center; 
+                            height: 100vh; 
+                            margin: 0; 
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            color: white;
+                            text-align: center;
+                        }
+                        h1 { margin-bottom: 1rem; }
+                        p { margin: 0.5rem 0; opacity: 0.9; }
+                        .icon { font-size: 4rem; margin-bottom: 1rem; }
+                    </style>
+                </head>
+                <body>
+                    <div class="icon">🌐</div>
+                    <h1>Welcome to SchoolTips67 Proxy</h1>
+                    <p>Enter a website URL above to get started</p>
+                    <p>Use fullscreen mode for distraction-free browsing</p>
+                    <p>Open in about:blank for a clean experience</p>
+                </body>
+                </html>
+            `;
+        });
+    </script>
+</body>
+</html>

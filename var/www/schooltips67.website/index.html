@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SchoolTips67 - Study Smart, Stay Focused</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #764ba2;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .tips-section {
+            background: white;
+            padding: 4rem 0;
+            margin: 2rem 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tip-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .focus-techniques {
+            background: #f8f9fa;
+            padding: 4rem 0;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .technique-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .technique-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .technique-item h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .dictionary-section {
+            background: white;
+            padding: 4rem 0;
+            margin: 2rem 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box {
+            max-width: 500px;
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .search-input:focus {
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-button:hover {
+            background: #764ba2;
+        }
+
+        .dictionary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .word-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #28a745;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .word-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .word-term {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .word-definition {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">School<span>Tips67</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#tips">Study Tips</a></li>
+                        <li><a href="#focus">Focus Techniques</a></li>
+                        <li><a href="#dictionary">Dictionary</a></li>
+                        <li><a href="/calculator.html">🧮 Calculator</a></li>
+                        <li><a href="/dashboard.html">📊 Dashboard</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Welcome to SchoolTips67</h1>
+                <p>Your ultimate guide to staying focused, studying smart, and achieving academic success!</p>
+                <a href="#tips" class="cta-button">Start Learning Now</a>
+            </div>
+        </section>
+
+        <section id="tips" class="tips-section">
+            <div class="container">
+                <h2 style="text-align: center; font-size: 2.5rem; color: #333; margin-bottom: 1rem;">Essential Study Tips</h2>
+                <p style="text-align: center; color: #666; font-size: 1.1rem;">Master these proven techniques to boost your academic performance</p>
+                
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h3>📚 Create a Study Schedule</h3>
+                        <p>Plan your study sessions in advance. Break down subjects into manageable chunks and stick to your timetable. Consistency is key to building effective study habits.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h3>🎯 Set Clear Goals</h3>
+                        <p>Define specific, measurable objectives for each study session. Whether it's completing a chapter or mastering a concept, clear goals keep you motivated and on track.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h3>🔄 Use Active Learning</h3>
+                        <p>Don't just read passively. Take notes, ask questions, create mind maps, and teach concepts to others. Active engagement improves retention significantly.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h3>📱 Minimize Distractions</h3>
+                        <p>Put away your phone, close unnecessary tabs, and create a dedicated study space. A distraction-free environment is crucial for deep learning.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h3>⏰ Take Regular Breaks</h3>
+                        <p>Use the Pomodoro Technique: study for 25 minutes, then take a 5-minute break. This prevents burnout and maintains your concentration levels.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h3>💤 Get Enough Sleep</h3>
+                        <p>Quality sleep is essential for memory consolidation. Aim for 7-9 hours of sleep to ensure your brain can process and retain information effectively.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="focus" class="focus-techniques">
+            <div class="container">
+                <h2 style="text-align: center; font-size: 2.5rem; color: #333; margin-bottom: 1rem;">Focus Enhancement Techniques</h2>
+                <p style="text-align: center; color: #666; font-size: 1.1rem;">Proven methods to improve concentration and stay focused during study sessions</p>
+                
+                <div class="technique-list">
+                    <div class="technique-item">
+                        <h4>🧘 Mindfulness Meditation</h4>
+                        <p>Practice 5-10 minutes of meditation daily to improve focus and reduce stress. Apps like Headspace or Calm can guide you through the process.</p>
+                    </div>
+                    
+                    <div class="technique-item">
+                        <h4>🎵 Background Music</h4>
+                        <p>Listen to instrumental music, nature sounds, or white noise to create an optimal study atmosphere. Avoid lyrics that might distract you.</p>
+                    </div>
+                    
+                    <div class="technique-item">
+                        <h4>🍎 Healthy Snacking</h4>
+                        <p>Fuel your brain with nuts, fruits, and water. Avoid sugar crashes by choosing snacks that provide sustained energy.</p>
+                    </div>
+                    
+                    <div class="technique-item">
+                        <h4>🏃 Physical Exercise</h4>
+                        <p>Regular exercise improves blood flow to the brain and enhances cognitive function. Even a 10-minute walk can boost your focus.</p>
+                    </div>
+                    
+                    <div class="technique-item">
+                        <h4>📝 Note-Taking Systems</h4>
+                        <p>Use methods like Cornell Notes or mind mapping to organize information effectively. Good notes make review sessions more productive.</p>
+                    </div>
+                    
+                    <div class="technique-item">
+                        <h4>🔄 Spaced Repetition</h4>
+                        <p>Review material at increasing intervals to strengthen long-term retention. This technique is scientifically proven to enhance memory.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dictionary" class="dictionary-section">
+            <div class="container">
+                <h2 style="text-align: center; font-size: 2.5rem; color: #333; margin-bottom: 1rem;">School Terms Dictionary</h2>
+                <p style="text-align: center; color: #666; font-size: 1.1rem;">Essential academic vocabulary to help you succeed in school</p>
+                
+                <div class="search-box">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search for a school term...">
+                    <button class="search-button" onclick="searchWords()">🔍</button>
+                </div>
+                
+                <div class="dictionary-grid" id="dictionaryGrid">
+                    <div class="word-card">
+                        <div class="word-term">Assignment</div>
+                        <div class="word-definition">A task or piece of work given to students to complete, usually for assessment purposes.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Bibliography</div>
+                        <div class="word-definition">A list of sources (books, articles, websites) used or referenced in research or academic work.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Citation</div>
+                        <div class="word-definition">A reference to a source of information used in academic work, giving credit to the original author.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Dissertation</div>
+                        <div class="word-definition">A long essay or research project, typically required for a degree, presenting original research on a chosen topic.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Elective</div>
+                        <div class="word-definition">A course or subject that students can choose to take, as opposed to required or mandatory courses.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Finals</div>
+                        <div class="word-definition">Comprehensive exams given at the end of a semester or academic year to test cumulative knowledge.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">GPA</div>
+                        <div class="word-definition">Grade Point Average - a numerical representation of a student's academic performance over time.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Hypothesis</div>
+                        <div class="word-definition">A proposed explanation or prediction that can be tested through research and experimentation.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Internship</div>
+                        <div class="word-definition">A temporary work experience program that provides practical training in a professional field.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Journalism</div>
+                        <div class="word-definition">The activity or profession of writing for newspapers, magazines, or news websites or preparing news broadcasts.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Kinesthetic</div>
+                        <div class="word-definition">A learning style that involves physical movement and hands-on activities to understand concepts.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Laboratory</div>
+                        <div class="word-definition">A room or building equipped for scientific experiments, research, or teaching practical science.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Midterm</div>
+                        <div class="word-definition">An examination given in the middle of an academic term to assess student progress.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Notebook</div>
+                        <div class="word-definition">A book of blank or lined pages for writing notes, often used by students in classes.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Outline</div>
+                        <div class="word-definition">A structured plan or framework showing the main points and organization of an essay or presentation.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Plagiarism</div>
+                        <div class="word-definition">The practice of using someone else's work or ideas without proper attribution, considered academic dishonesty.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Quiz</div>
+                        <div class="word-definition">A short test or examination, typically less comprehensive than a full exam.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Research</div>
+                        <div class="word-definition">The systematic investigation and study of materials and sources to establish facts and reach conclusions.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Semester</div>
+                        <div class="word-definition">A half-year academic term, typically lasting 15-18 weeks in colleges and universities.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Thesis</div>
+                        <div class="word-definition">A statement or theory put forward to be proved or an extended essay, especially for a university degree.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Undergraduate</div>
+                        <div class="word-definition">A student who is pursuing their first degree at a college or university (bachelor's degree).</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Vocabulary</div>
+                        <div class="word-definition">The body of words used in a particular language, subject, or by a particular person.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Workshop</div>
+                        <div class="word-definition">An interactive class or seminar focusing on practical skills and hands-on learning activities.</div>
+                    </div>
+                    
+                    <div class="word-card">
+                        <div class="word-term">Yearbook</div>
+                        <div class="word-definition">An annual publication documenting school events, students, and activities from the academic year.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" style="background: white; padding: 4rem 0; margin: 2rem 0; border-radius: 20px;">
+            <div class="container">
+                <h2 style="text-align: center; font-size: 2.5rem; color: #333; margin-bottom: 2rem;">Quick Study Resources</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div style="background: #f8f9fa; padding: 2rem; border-radius: 15px; border-left: 4px solid #28a745;">
+                        <h3 style="color: #28a745; margin-bottom: 1rem;">📖 Study Tools</h3>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li style="margin: 0.5rem 0;">• Flashcards (physical or digital)</li>
+                            <li style="margin: 0.5rem 0;">• Timer for Pomodoro sessions</li>
+                            <li style="margin: 0.5rem 0;">• Highlighters and colored pens</li>
+                            <li style="margin: 0.5rem 0;">• Notebook for summary notes</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 2rem; border-radius: 15px; border-left: 4px solid #17a2b8;">
+                        <h3 style="color: #17a2b8; margin-bottom: 1rem;">💡 Memory Techniques</h3>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li style="margin: 0.5rem 0;">• Acronyms and mnemonics</li>
+                            <li style="margin: 0.5rem 0;">• Visual associations</li>
+                            <li style="margin: 0.5rem 0;">• Story-based learning</li>
+                            <li style="margin: 0.5rem 0;">• Chunking information</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 2rem; border-radius: 15px; border-left: 4px solid #ffc107;">
+                        <h3 style="color: #e68900; margin-bottom: 1rem;">⚡ Productivity Hacks</h3>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li style="margin: 0.5rem 0;">• Two-minute rule</li>
+                            <li style="margin: 0.5rem 0;">• Batch similar tasks</li>
+                            <li style="margin: 0.5rem 0;">• Eliminate perfectionism</li>
+                            <li style="margin: 0.5rem 0;">• Use deadlines effectively</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div style="text-align: center;">
+                <h3 style="margin-bottom: 1rem;">SchoolTips67</h3>
+                <p style="margin-bottom: 2rem;">Empowering students to achieve academic excellence through proven study techniques and focus strategies.</p>
+                <p>&copy; 2025 SchoolTips67. All rights reserved. Study smart, stay focused!</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dictionary data for search functionality
+        const dictionaryData = [
+            { term: "Assignment", definition: "A task or piece of work given to students to complete, usually for assessment purposes." },
+            { term: "Bibliography", definition: "A list of sources (books, articles, websites) used or referenced in research or academic work." },
+            { term: "Citation", definition: "A reference to a source of information used in academic work, giving credit to the original author." },
+            { term: "Dissertation", definition: "A long essay or research project, typically required for a degree, presenting original research on a chosen topic." },
+            { term: "Elective", definition: "A course or subject that students can choose to take, as opposed to required or mandatory courses." },
+            { term: "Finals", definition: "Comprehensive exams given at the end of a semester or academic year to test cumulative knowledge." },
+            { term: "GPA", definition: "Grade Point Average - a numerical representation of a student's academic performance over time." },
+            { term: "Hypothesis", definition: "A proposed explanation or prediction that can be tested through research and experimentation." },
+            { term: "Internship", definition: "A temporary work experience program that provides practical training in a professional field." },
+            { term: "Journalism", definition: "The activity or profession of writing for newspapers, magazines, or news websites or preparing news broadcasts." },
+            { term: "Kinesthetic", definition: "A learning style that involves physical movement and hands-on activities to understand concepts." },
+            { term: "Laboratory", definition: "A room or building equipped for scientific experiments, research, or teaching practical science." },
+            { term: "Midterm", definition: "An examination given in the middle of an academic term to assess student progress." },
+            { term: "Notebook", definition: "A book of blank or lined pages for writing notes, often used by students in classes." },
+            { term: "Outline", definition: "A structured plan or framework showing the main points and organization of an essay or presentation." },
+            { term: "Plagiarism", definition: "The practice of using someone else's work or ideas without proper attribution, considered academic dishonesty." },
+            { term: "Quiz", definition: "A short test or examination, typically less comprehensive than a full exam." },
+            { term: "Research", definition: "The systematic investigation and study of materials and sources to establish facts and reach conclusions." },
+            { term: "Semester", definition: "A half-year academic term, typically lasting 15-18 weeks in colleges and universities." },
+            { term: "Thesis", definition: "A statement or theory put forward to be proved or an extended essay, especially for a university degree." },
+            { term: "Undergraduate", definition: "A student who is pursuing their first degree at a college or university (bachelor's degree)." },
+            { term: "Vocabulary", definition: "The body of words used in a particular language, subject, or by a particular person." },
+            { term: "Workshop", definition: "An interactive class or seminar focusing on practical skills and hands-on learning activities." },
+            { term: "Yearbook", definition: "An annual publication documenting school events, students, and activities from the academic year." }
+        ];
+
+        // Search function for dictionary
+        function searchWords() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const grid = document.getElementById('dictionaryGrid');
+            
+            if (searchTerm === '') {
+                // Show all words if search is empty
+                displayAllWords();
+                return;
+            }
+            
+            // Filter words based on search term
+            const filteredWords = dictionaryData.filter(word => 
+                word.term.toLowerCase().includes(searchTerm) || 
+                word.definition.toLowerCase().includes(searchTerm)
+            );
+            
+            // Clear grid and display filtered results
+            grid.innerHTML = '';
+            
+            if (filteredWords.length === 0) {
+                grid.innerHTML = '<div style="text-align: center; grid-column: 1 / -1; padding: 2rem; color: #666;">No words found matching your search.</div>';
+            } else {
+                filteredWords.forEach(word => {
+                    const wordCard = document.createElement('div');
+                    wordCard.className = 'word-card';
+                    wordCard.innerHTML = `
+                        <div class="word-term">${word.term}</div>
+                        <div class="word-definition">${word.definition}</div>
+                    `;
+                    grid.appendChild(wordCard);
+                });
+            }
+        }
+        
+        // Display all words
+        function displayAllWords() {
+            const grid = document.getElementById('dictionaryGrid');
+            grid.innerHTML = '';
+            
+            dictionaryData.forEach(word => {
+                const wordCard = document.createElement('div');
+                wordCard.className = 'word-card';
+                wordCard.innerHTML = `
+                    <div class="word-term">${word.term}</div>
+                    <div class="word-definition">${word.definition}</div>
+                `;
+                grid.appendChild(wordCard);
+            });
+        }
+        
+        // Search on Enter key press
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchWords();
+            }
+        });
+        
+        // Real-time search as user types
+        document.getElementById('searchInput').addEventListener('input', searchWords);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some interactive animations
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.tip-card, .technique-item, .word-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight - 100) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize cards with hidden state
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.tip-card, .technique-item, .word-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+        });
+    </script>
+</body>
+</html>
